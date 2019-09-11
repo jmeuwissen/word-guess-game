@@ -1,5 +1,5 @@
 
-const WORDS = ["pineapple", "squash", "astronomy", "rattlesnake", "xylophone", "watermelon", "bumblebee", "butterscotch", "headphones", "obfuscation", "iufuegweew"]; //muahahaha
+const WORDS = ["pineapple", "squash", "astronomy", "rattlesnake", "xylophone", "watermelon", "bumblebee", "butterscotch", "headphones", "obfuscation"]; //muahahaha
 
 let isPlaying = false;      //control variable
 let incompleteWord = [];    //stores the in-progress word as an array of strings //hooray for immutable strings... javascript is fun
