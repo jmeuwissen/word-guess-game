@@ -22,10 +22,10 @@ const messageEL = document.getElementById("message");
 //display metagame data
 
 //incompleteWord toString function
-function arrayToString(arr){
+function arrayToString(arr) {
     let temp = "";
-    for(let i = 0; i < arr.length; i++){
-        temp = temp  + arr[i] + " ";
+    for (let i = 0; i < arr.length; i++) {
+        temp = temp + arr[i] + " ";
     }
     return temp;
 }
@@ -34,8 +34,8 @@ function arrayToString(arr){
 //losses
 
 document.onkeyup = function (event) {
-    
-    const guess = event.key.toLowerCase();  
+
+    const guess = event.key.toLowerCase();
 
 
     //I should have proabably done this whole control flow with a switch instead of nested if else
@@ -48,22 +48,22 @@ document.onkeyup = function (event) {
         // (re)initialize incorrect chars
         wrongChars = "";
         incompleteWord = [];
-        
-        
-        messageEL.textContent = "Here's a round of Word Guess!"; 
+
+
+        messageEL.textContent = "Here's a round of Word Guess!";
         winsEL.textContent = "Wins: " + wins;
         lossesEL.textContent = "Losses: " + losses;
         wrongCharsEL.textContent = "Incorrect characters: " + wrongChars;
         remainingGuessesEL.textContent = "Guesses remaining: " + remainingGuesses;
-        
 
 
-        
+
+
         console.log(wrongChars.length);
 
         remainingGuesses = 7;
-        
-        
+
+
 
         // select a random word to be guessed 
         answer = WORDS[Math.floor(Math.random() * WORDS.length)]
@@ -99,7 +99,7 @@ document.onkeyup = function (event) {
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////// MAIN GAMEPLAY LOGIC /////////////////////////
     else {
-        
+
         console.log("entered main loop")
 
         // check if character has already been guessed and is an incorrect guess
@@ -120,21 +120,21 @@ document.onkeyup = function (event) {
             messageEL.textContent = "You got it!";
 
             //replace underscores with guess character in indexes that correspond to correct ones in answer
-            for (let i = 0; i < answer.length; i++) { 
-                
+            for (let i = 0; i < answer.length; i++) {
+
                 //replaces underscore with if guess character is at the current index
                 if (answer[i] === guess) {
-                    
+
 
                     incompleteWord[i] = guess;
                     console.log(true + " " + incompleteWord[i]);
                 }
             }
-            
+
             //update incompleteWord
             incompleteWordEL.textContent = "Incomplete word: " + arrayToString(incompleteWord);
 
-            
+
         }
 
 
@@ -142,7 +142,7 @@ document.onkeyup = function (event) {
 
         else {
             console.log("oops");
-            console.log("guess char: "+ guess);
+            console.log("guess char: " + guess);
 
             //display "incorrect guess" in user feedback element
             messageEL.textContent = "That ain't right";
@@ -160,7 +160,7 @@ document.onkeyup = function (event) {
 
 
         /// display incomplete word on screen with a space between each character
-        for(let i = 0; i < answer.length; i++){
+        for (let i = 0; i < answer.length; i++) {
 
         }
 
@@ -168,7 +168,7 @@ document.onkeyup = function (event) {
         /////////////////////GAME OVER////////////////////
 
         console.log("incorrectcharslength " + wrongChars.length);
-        if(remainingGuesses < 1){
+        if (remainingGuesses < 1) {
             //display loss text and display text asking them if they want to play again in user feedback element
             messageEL.textContent = "Woops! You lost! Press any key to play again";
             incompleteWordEL.textContent = "Incomplete word: " + arrayToString(answer);
