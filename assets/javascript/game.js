@@ -176,6 +176,7 @@ document.onkeyup = function (event) {
 
             //increment losses
             losses++;
+            lossesEL.textContent = "Losses: " + losses;
 
             //set control variable to reinitialize
             isPlaying = false;
@@ -189,6 +190,7 @@ document.onkeyup = function (event) {
 
             wins++;
             ///update win display
+            winsEL.textContent = "Wins: " + wins;
 
             //set control variable to reinitialize
             isPlaying = false;
