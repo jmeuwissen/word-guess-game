@@ -21,9 +21,6 @@ const messageEL = document.getElementById("message");
 
 //display metagame data
 
-/**
- * @returns 
- */
 function arrayToString(arr) {
     let temp = "";
     for (let i = 0; i < arr.length; i++) {
@@ -39,7 +36,6 @@ function arrayToString(arr) {
  *
  */
 
- 
 function initializeGame() {
     directionsTextEL.textContent = " ";
 
@@ -172,7 +168,7 @@ document.onkeyup = function (event) {
         if (remainingGuesses < 1) {
             //display loss text and display text asking them if they want to play again in user feedback element
             messageEL.textContent = "Woops! You lost! Press any key to play again";
-            incompleteWordEL.textContent = "Incomplete word: " + answer;
+            incompleteWordEL.textContent = "Incomplete word: " + arrayToString(answer);
 
 
             //increment losses
