@@ -21,7 +21,9 @@ const messageEL = document.getElementById("message");
 
 //display metagame data
 
-//incompleteWord toString function
+/**
+ * @returns 
+ */
 function arrayToString(arr) {
     let temp = "";
     for (let i = 0; i < arr.length; i++) {
@@ -30,8 +32,56 @@ function arrayToString(arr) {
     return temp;
 }
 
-//wins
-//losses
+
+
+/**
+ * Sets game to initialized state
+ *
+ */
+
+ 
+function initializeGame() {
+    directionsTextEL.textContent = " ";
+
+    // (re)initialize incorrect chars
+    wrongChars = "";
+    incompleteWord = [];
+
+
+    messageEL.textContent = "Here's a round of Word Guess!";
+    winsEL.textContent = "Wins: " + wins;
+    lossesEL.textContent = "Losses: " + losses;
+    wrongCharsEL.textContent = "Incorrect characters: " + wrongChars;
+    remainingGuessesEL.textContent = "Guesses remaining: " + remainingGuesses;
+
+
+
+
+    console.log(wrongChars.length);
+
+    remainingGuesses = 7;
+
+
+
+    // select a random word to be guessed 
+    answer = WORDS[Math.floor(Math.random() * WORDS.length)]
+    console.log("answer: " + answer);
+
+    // populate incomplete word with blank spaces (underscores)
+
+    for (let i = 0; i < answer.length; i++) {
+        incompleteWord.push("_");
+        incompleteWord.t
+
+
+    }
+    incompleteWordEL.textContent = "Incomplete word: " + arrayToString(incompleteWord);
+    console.log("incompleteWord: " + incompleteWord);
+
+
+    //changes control variable to start gameplay 
+    isPlaying = true;
+}
 
 document.onkeyup = function (event) {
 
@@ -43,57 +93,8 @@ document.onkeyup = function (event) {
 
     /////////////////(re)initialization/////////////////
     if (!isPlaying) {
-        directionsTextEL.textContent = " ";
-
-        // (re)initialize incorrect chars
-        wrongChars = "";
-        incompleteWord = [];
-
-
-        messageEL.textContent = "Here's a round of Word Guess!";
-        winsEL.textContent = "Wins: " + wins;
-        lossesEL.textContent = "Losses: " + losses;
-        wrongCharsEL.textContent = "Incorrect characters: " + wrongChars;
-        remainingGuessesEL.textContent = "Guesses remaining: " + remainingGuesses;
-
-
-
-
-        console.log(wrongChars.length);
-
-        remainingGuesses = 7;
-
-
-
-        // select a random word to be guessed 
-        answer = WORDS[Math.floor(Math.random() * WORDS.length)]
-        console.log("answer: " + answer);
-
-        // populate incomplete word with blank spaces (underscores)
-
-        for (let i = 0; i < answer.length; i++) {
-            incompleteWord.push("_");
-            incompleteWord.t
-
-
-        }
-        incompleteWordEL.textContent = "Incomplete word: " + arrayToString(incompleteWord);
-        console.log("incompleteWord: " + incompleteWord);
-
-
-        //changes control variable to start gameplay 
-        isPlaying = true;
-
+        initializeGame();
     }
-
-
-
-
-
-
-
-
-
 
 
     ///////////////////////////////////////////////////////////////////////
@@ -171,7 +172,7 @@ document.onkeyup = function (event) {
         if (remainingGuesses < 1) {
             //display loss text and display text asking them if they want to play again in user feedback element
             messageEL.textContent = "Woops! You lost! Press any key to play again";
-            incompleteWordEL.textContent = "Incomplete word: " + arrayToString(answer);
+            incompleteWordEL.textContent = "Incomplete word: " + answer;
 
 
             //increment losses
