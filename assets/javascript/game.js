@@ -19,18 +19,6 @@ const incompleteWordEL = document.getElementById("incomplete-word");
 const messageEL = document.getElementById("message");
 
 
-//display metagame data
-
-function arrayToString(arr) {
-    let temp = "";
-    for (let i = 0; i < arr.length; i++) {
-        temp = temp + arr[i] + " ";
-    }
-    return temp;
-}
-
-
-
 /**
  * Sets game to initialized state
  *
@@ -71,7 +59,7 @@ function initializeGame() {
 
 
     }
-    incompleteWordEL.textContent = "Incomplete word: " + arrayToString(incompleteWord);
+    incompleteWordEL.textContent = "Incomplete word: " + incompleteWord.join("");
     console.log("incompleteWord: " + incompleteWord);
 
 
@@ -129,7 +117,7 @@ document.onkeyup = function (event) {
             }
 
             //update incompleteWord
-            incompleteWordEL.textContent = "Incomplete word: " + arrayToString(incompleteWord);
+            incompleteWordEL.textContent = "Incomplete word: " + incompleteWord.join("");
 
 
         }
@@ -168,7 +156,7 @@ document.onkeyup = function (event) {
         if (remainingGuesses < 1) {
             //display loss text and display text asking them if they want to play again in user feedback element
             messageEL.textContent = "Woops! You lost! Press any key to play again";
-            incompleteWordEL.textContent = "Incomplete word: " + arrayToString(answer);
+            incompleteWordEL.textContent = "Incomplete word: " + answer;
 
 
             //increment losses
