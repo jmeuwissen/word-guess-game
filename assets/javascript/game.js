@@ -18,18 +18,27 @@ const remainingGuessesEL = document.getElementById("guesses-remaining");
 const incompleteWordEL = document.getElementById("incomplete-word");
 const messageEL = document.getElementById("message");
 
+/**
+ * Resets the variables for tracking game to their state at game start
+ */
 
 function resetGameState() {
+
+}
+
+/**
+ * Resets contents of HTML to the initial state
+ */
+
+function resetHTMLContent() {
     directionsTextEL.textContent = " ";
     messageEL.textContent = "Here's a round of Word Guess!";
     winsEL.textContent = "Wins: " + wins;
     lossesEL.textContent = "Losses: " + losses;
     wrongCharsEL.textContent = "Incorrect characters: " + wrongChars;
     remainingGuessesEL.textContent = "Guesses remaining: " + remainingGuesses;
-}
-
-function resetHTMLContent() {
-    
+    incompleteWordEL.textContent = "Incomplete word: " + incompleteWord.join("");
+    return;
 }
 
 /**
@@ -38,15 +47,14 @@ function resetHTMLContent() {
  */
 
 function initializeGame() {
+
+
     
     wrongChars = "";
     incompleteWord = [];
-   
-
-    console.log(wrongChars.length);
-
     remainingGuesses = 7;
 
+    resetHTMLContent();
 
 
     // select a random word to be guessed 
@@ -57,11 +65,9 @@ function initializeGame() {
 
     for (let i = 0; i < answer.length; i++) {
         incompleteWord.push("_");
-        incompleteWord.t
-
-
     }
-    incompleteWordEL.textContent = "Incomplete word: " + incompleteWord.join("");
+
+
     console.log("incompleteWord: " + incompleteWord);
 
 
