@@ -2,7 +2,7 @@
 const WORDS = ["pineapple", "squash", "astronomy", "rattlesnake", "xylophone", "watermelon", "bumblebee", "butterscotch", "headphones", "obfuscation"]; //muahahaha
 
 let isPlaying = false;      //control variable
-let incompleteWord = [];    //stores the in-progress word as an array of strings //hooray for immutable strings... javascript is fun
+let partialSolution = [];    //stores the in-progress word as an array of strings //hooray for immutable strings... javascript is fun
 let answer = "";            //actual answer
 let wrongChars = "";        //string of incorrect guesses
 let wins = 0;               //win counter
@@ -15,7 +15,7 @@ const winsEL = document.getElementById("wins");
 const lossesEL = document.getElementById("losses");
 const wrongCharsEL = document.getElementById("wrong-chars");
 const remainingGuessesEL = document.getElementById("guesses-remaining");
-const incompleteWordEL = document.getElementById("incomplete-word");
+const partialSolutionEL = document.getElementById("partial-solution");
 const messageEL = document.getElementById("message");
 
 
@@ -29,12 +29,12 @@ function chooseRandomWord() {
 }
 
 /**
- * fills incompleteWord with underscores to indicate unguessed characters
+ * fills partialSolution with underscores to indicate unguessed characters
  */
 
- function fillIncompleteWord() {
+ function fillpartialSolution() {
     for (let i = 0; i < answer.length; i++) {
-        incompleteWord.push("_");
+        partialSolution.push("_");
     }
  }
 
@@ -44,10 +44,10 @@ function chooseRandomWord() {
 
 function resetGameState() {
     wrongChars = "";
-    incompleteWord = [];
+    partialSolution = [];
     remainingGuesses = 7;
     answer = chooseRandomWord();
-    fillIncompleteWord();
+    fillpartialSolution();
 }
 
 /**
@@ -61,7 +61,7 @@ function resetHTMLContent() {
     lossesEL.textContent =              "Losses: " + losses;
     wrongCharsEL.textContent =          "Incorrect characters: " + wrongChars;
     remainingGuessesEL.textContent =    "Guesses remaining: " + remainingGuesses;
-    incompleteWordEL.textContent =      "Incomplete word: " + incompleteWord.join("");
+    partialSolutionEL.textContent =      "Incomplete word: " + partialSolution.join("");
     return;
 }
 
@@ -102,9 +102,9 @@ document.onkeyup = function (event) {
         if (wrongChars.indexOf(guess) !== -1) {
             ///display "you already guessed that!" in user feedback element
             messageEL.textContent = "Pick a letter that you haven't guessed, please...";
-        } else if (incompleteWord.indexOf(guess) !== -1) {
+        } else if (partialSolution.indexOf(guess) !== -1) {
             ///display "you already guessed that!" in user feedback element
-            messageEL.textContent = "Pick a letter that you haven't guessed, please...";
+            messageEL.textContent = "Correct! But you already guessed that...";
         } else if(guess.match(/[^a-z]/)){
             messageEL.textContent = "Non-alphabetical character received! Input a letter, please";
         }
@@ -127,13 +127,13 @@ document.onkeyup = function (event) {
                 if (answer[i] === guess) {
 
 
-                    incompleteWord[i] = guess;
-                    console.log(true + " " + incompleteWord[i]);
+                    partialSolution[i] = guess;
+                    console.log(true + " " + partialSolution[i]);
                 }
             }
 
-            //update incompleteWord
-            incompleteWordEL.textContent = "Incomplete word: " + incompleteWord.join("");
+            //update partialSolution
+            partialSolutionEL.textContent = "Incomplete word: " + partialSolution.join("");
 
 
         }
@@ -172,7 +172,7 @@ document.onkeyup = function (event) {
         if (remainingGuesses < 1) {
             //display loss text and display text asking them if they want to play again in user feedback element
             messageEL.textContent = "Woops! You lost! Press any key to play again";
-            incompleteWordEL.textContent = "Incomplete word: " + answer;
+            partialSolutionEL.textContent = "Incomplete word: " + answer;
 
 
             //increment losses
@@ -185,7 +185,7 @@ document.onkeyup = function (event) {
 
         /////////////////////YOU WON/////////////////////
 
-        if (incompleteWord.indexOf("_") === -1) {
+        if (partialSolution.indexOf("_") === -1) {
             //display win text and display text asking them if they want to play again in user feedback element
             messageEL.textContent = "Hooray! You win! Press any key to play again";
 
