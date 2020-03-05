@@ -56,12 +56,12 @@ function resetGameState() {
 
 function resetHTMLContent() {
     directionsTextEL.textContent = " ";
-    messageEL.textContent = "Here's a round of Word Guess!";
-    winsEL.textContent = "Wins: " + wins;
-    lossesEL.textContent = "Losses: " + losses;
-    wrongCharsEL.textContent = "Incorrect characters: " + wrongChars;
-    remainingGuessesEL.textContent = "Guesses remaining: " + remainingGuesses;
-    incompleteWordEL.textContent = "Incomplete word: " + incompleteWord.join("");
+    messageEL.textContent =             "Here's a round of Word Guess!";
+    winsEL.textContent =                "Wins: " + wins;
+    lossesEL.textContent =              "Losses: " + losses;
+    wrongCharsEL.textContent =          "Incorrect characters: " + wrongChars;
+    remainingGuessesEL.textContent =    "Guesses remaining: " + remainingGuesses;
+    incompleteWordEL.textContent =      "Incomplete word: " + incompleteWord.join("");
     return;
 }
 
@@ -98,10 +98,14 @@ document.onkeyup = function (event) {
         console.log("entered main loop")
 
         // check if character has already been guessed and is an incorrect guess
-        if (wrongChars.indexOf(guess) !== -1 || incompleteWord.indexOf(guess) !== -1) {
+        
+        if (wrongChars.indexOf(guess) !== -1) {
             ///display "you already guessed that!" in user feedback element
             messageEL.textContent = "Pick a letter that you haven't guessed, please...";
-        }
+        } else if (incompleteWord.indexOf(guess) !== -1) {
+            ///display "you already guessed that!" in user feedback element
+            messageEL.textContent = "Pick a letter that you haven't guessed, please...";
+        } 
 
 
 
