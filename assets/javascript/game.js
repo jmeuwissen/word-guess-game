@@ -97,8 +97,8 @@ document.onkeyup = function (event) {
 
         console.log("entered main loop")
 
-        // check if character has already been guessed and is an incorrect guess
         
+        //begin input validation
         if (wrongChars.indexOf(guess) !== -1) {
             ///display "you already guessed that!" in user feedback element
             messageEL.textContent = "Pick a letter that you haven't guessed, please...";
@@ -108,7 +108,7 @@ document.onkeyup = function (event) {
         } else if(guess.match(/[^a-z]/)){
             messageEL.textContent = "Non-alphabetical character received! Input a letter, please";
         }
-
+        //end input validation
 
 
 
