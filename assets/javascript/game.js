@@ -18,12 +18,36 @@ const remainingGuessesEL = document.getElementById("guesses-remaining");
 const incompleteWordEL = document.getElementById("incomplete-word");
 const messageEL = document.getElementById("message");
 
+
+/**
+ * picks a random word from the array of possible words to guess
+ * 
+ * @returns Random word from WORDS array
+ */
+function chooseRandomWord() {
+    return  WORDS[Math.floor(Math.random() * WORDS.length)];
+}
+
+/**
+ * fills incompleteWord with underscores to indicate unguessed characters
+ */
+
+ function fillIncompleteWord() {
+    for (let i = 0; i < answer.length; i++) {
+        incompleteWord.push("_");
+    }
+ }
+
 /**
  * Resets the variables for tracking game to their state at game start
  */
 
 function resetGameState() {
-
+    wrongChars = "";
+    incompleteWord = [];
+    remainingGuesses = 7;
+    answer = chooseRandomWord();
+    fillIncompleteWord();
 }
 
 /**
@@ -49,23 +73,18 @@ function resetHTMLContent() {
 function initializeGame() {
 
 
-    
-    wrongChars = "";
-    incompleteWord = [];
-    remainingGuesses = 7;
+
 
     resetHTMLContent();
 
 
     // select a random word to be guessed 
-    answer = WORDS[Math.floor(Math.random() * WORDS.length)]
+
     console.log("answer: " + answer);
 
     // populate incomplete word with blank spaces (underscores)
 
-    for (let i = 0; i < answer.length; i++) {
-        incompleteWord.push("_");
-    }
+
 
 
     console.log("incompleteWord: " + incompleteWord);
