@@ -19,27 +19,29 @@ const incompleteWordEL = document.getElementById("incomplete-word");
 const messageEL = document.getElementById("message");
 
 
+function resetGameState() {
+    directionsTextEL.textContent = " ";
+    messageEL.textContent = "Here's a round of Word Guess!";
+    winsEL.textContent = "Wins: " + wins;
+    lossesEL.textContent = "Losses: " + losses;
+    wrongCharsEL.textContent = "Incorrect characters: " + wrongChars;
+    remainingGuessesEL.textContent = "Guesses remaining: " + remainingGuesses;
+}
+
+function resetHTMLContent() {
+    
+}
+
 /**
  * Sets game to initialized state
  *
  */
 
 function initializeGame() {
-    directionsTextEL.textContent = " ";
-
-    // (re)initialize incorrect chars
+    
     wrongChars = "";
     incompleteWord = [];
-
-
-    messageEL.textContent = "Here's a round of Word Guess!";
-    winsEL.textContent = "Wins: " + wins;
-    lossesEL.textContent = "Losses: " + losses;
-    wrongCharsEL.textContent = "Incorrect characters: " + wrongChars;
-    remainingGuessesEL.textContent = "Guesses remaining: " + remainingGuesses;
-
-
-
+   
 
     console.log(wrongChars.length);
 
