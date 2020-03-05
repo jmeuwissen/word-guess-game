@@ -72,28 +72,9 @@ function resetHTMLContent() {
 
 function initializeGame() {
 
-
-
-
     resetHTMLContent();
-
     resetGameState();
 
-
-    // select a random word to be guessed 
-
-    console.log("answer: " + answer);
-
-    // populate incomplete word with blank spaces (underscores)
-
-
-
-
-    console.log("incompleteWord: " + incompleteWord);
-
-
-    //changes control variable to start gameplay 
-    isPlaying = true;
 }
 
 document.onkeyup = function (event) {
