@@ -77,6 +77,8 @@ function initializeGame() {
 
     resetHTMLContent();
 
+    resetGameState();
+
 
     // select a random word to be guessed 
 
