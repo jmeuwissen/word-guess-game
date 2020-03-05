@@ -105,7 +105,9 @@ document.onkeyup = function (event) {
         } else if (incompleteWord.indexOf(guess) !== -1) {
             ///display "you already guessed that!" in user feedback element
             messageEL.textContent = "Pick a letter that you haven't guessed, please...";
-        } 
+        } else if(guess.match(/[^a-z]/)){
+            messageEL.textContent = "Non-alphabetical character received! Input a letter, please";
+        }
 
 
 
