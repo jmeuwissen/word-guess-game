@@ -75,13 +75,23 @@ function initializeGame() {
 
 }
 /**
- * Deals with the game reaching a "lost" state
+ * Deals with the game reaching a defeated state
  */
 function handleLoss() {
     messageEL.textContent = "Woops! You lost! Press any key to play again";
     partialSolutionEL.textContent = "Incomplete word: " + answer;
     losses++;
     lossesEL.textContent = "Losses: " + losses;
+    isPlaying = false;
+}
+
+/**
+ * Deals with the game reaching a victorious state
+ */
+function handleWin() {
+    messageEL.textContent = "Hooray! You win! Press any key to play again";
+    wins++;
+    winsEL.textContent = "Wins: " + wins;
     isPlaying = false;
 }
 
@@ -160,16 +170,7 @@ document.onkeyup = function (event) {
         /////////////////////YOU WON/////////////////////
 
         if (partialSolution.indexOf("_") === -1) {
-            //display win text and display text asking them if they want to play again in user feedback element
-            messageEL.textContent = "Hooray! You win! Press any key to play again";
-
-            wins++;
-            ///update win display
-            winsEL.textContent = "Wins: " + wins;
-
-            //set control variable to reinitialize
-            isPlaying = false;
-
+            handleWin();
         }
     }
 }
