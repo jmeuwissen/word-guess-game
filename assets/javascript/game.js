@@ -147,6 +147,19 @@ function handleCorrectGuess() {
     partialSolutionEL.textContent = "Incomplete word: " + partialSolution.join("");
 }
 
+function handleWrongGuess() {
+        //display "incorrect guess" in user feedback element
+        messageEL.textContent = "That ain't right";
+
+        //put guess in incorrect char array
+        wrongChars = wrongChars + guess;
+        //update wrong-chars display
+        wrongCharsEL.textContent = "Incorrect characters: " + wrongChars;
+    
+        //update remaining guesses
+        remainingGuesses--;
+        remainingGuessesEL.textContent = "Guesses remaining: " + remainingGuesses;
+}
 
 document.onkeyup = function (event) {
 
@@ -182,17 +195,7 @@ document.onkeyup = function (event) {
 
     /////////////////////WRONG GUESS//////////////////////
 
-    //display "incorrect guess" in user feedback element
-    messageEL.textContent = "That ain't right";
 
-    //put guess in incorrect char array
-    wrongChars = wrongChars + guess;
-    //update wrong-chars display
-    wrongCharsEL.textContent = "Incorrect characters: " + wrongChars;
-
-    //update remaining guesses
-    remainingGuesses--;
-    remainingGuessesEL.textContent = "Guesses remaining: " + remainingGuesses;
 
 
 
