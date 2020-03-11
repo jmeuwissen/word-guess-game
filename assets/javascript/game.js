@@ -128,6 +128,26 @@ function validateInput(guess) {
     return true;
 }
 
+/**
+ * Deals with the player guessing the correct character
+ */
+
+function handleCorrectGuess() {
+    messageEL.textContent = "You got it!";
+
+    //replace underscores with guess character in indexes that correspond to correct ones in answer
+    for (let i = 0; i < answer.length; i++) {
+
+        //replaces underscore with if guess character is at the current index
+        if (answer[i] === guess) {
+            partialSolution[i] = guess;
+        }
+    }
+    //update partialSolution
+    partialSolutionEL.textContent = "Incomplete word: " + partialSolution.join("");
+}
+
+
 document.onkeyup = function (event) {
 
     const guess = event.key.toLowerCase();
@@ -139,7 +159,7 @@ document.onkeyup = function (event) {
     /////////////////(re)initialization/////////////////
     if (!isPlaying) {
         initializeGame();
-        return
+        return;
     }
 
 
@@ -148,26 +168,15 @@ document.onkeyup = function (event) {
 
 
     if (!validateInput(guess)) {
-        return
+        return;
     }
 
 
     /////////////////////RIGHT GUESS//////////////////////
     if (answer.indexOf(guess) !== -1) {
         //display "correct guess!" in user feedback element
-        messageEL.textContent = "You got it!";
-
-        //replace underscores with guess character in indexes that correspond to correct ones in answer
-        for (let i = 0; i < answer.length; i++) {
-
-            //replaces underscore with if guess character is at the current index
-            if (answer[i] === guess) {
-                partialSolution[i] = guess;
-            }
-        }
-        //update partialSolution
-        partialSolutionEL.textContent = "Incomplete word: " + partialSolution.join("");
-        return
+        handleCorrectGuess();
+        return;
     }
 
 
