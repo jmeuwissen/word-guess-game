@@ -119,7 +119,6 @@ document.onkeyup = function (event) {
 
         /////////////////////RIGHT GUESS//////////////////////
         else if (answer.indexOf(guess) !== -1) {
-            console.log("nice");
             //display "correct guess!" in user feedback element
             messageEL.textContent = "You got it!";
 
@@ -128,25 +127,16 @@ document.onkeyup = function (event) {
 
                 //replaces underscore with if guess character is at the current index
                 if (answer[i] === guess) {
-
-
                     partialSolution[i] = guess;
-                    console.log(true + " " + partialSolution[i]);
                 }
             }
-
             //update partialSolution
             partialSolutionEL.textContent = "Incomplete word: " + partialSolution.join("");
-
-
         }
 
 
         /////////////////////WRONG GUESS//////////////////////
         else {
-            console.log("oops");
-            console.log("guess char: " + guess);
-
             //display "incorrect guess" in user feedback element
             messageEL.textContent = "That ain't right";
 
@@ -163,8 +153,6 @@ document.onkeyup = function (event) {
 
 
         /////////////////////GAME OVER////////////////////
-
-        console.log("incorrectcharslength " + wrongChars.length);
         if (remainingGuesses < 1) {
             handleLoss();
         }
