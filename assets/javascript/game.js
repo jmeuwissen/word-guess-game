@@ -134,29 +134,23 @@ function validateInput(guess) {
 
 function handleCorrectGuess() {
     messageEL.textContent = "You got it!";
-
-    //replace underscores with guess character in indexes that correspond to correct ones in answer
     for (let i = 0; i < answer.length; i++) {
-
-        //replaces underscore with if guess character is at the current index
         if (answer[i] === guess) {
             partialSolution[i] = guess;
         }
     }
-    //update partialSolution
     partialSolutionEL.textContent = "Incomplete word: " + partialSolution.join("");
 }
 
-function handleWrongGuess() {
-        //display "incorrect guess" in user feedback element
-        messageEL.textContent = "That ain't right";
+/**
+ * Deals with the player guessing the incorrect character
+ */
 
-        //put guess in incorrect char array
+function handleWrongGuess() {
+        messageEL.textContent = "That ain't right";
         wrongChars = wrongChars + guess;
-        //update wrong-chars display
         wrongCharsEL.textContent = "Incorrect characters: " + wrongChars;
-    
-        //update remaining guesses
+
         remainingGuesses--;
         remainingGuessesEL.textContent = "Guesses remaining: " + remainingGuesses;
 }
@@ -165,39 +159,22 @@ document.onkeyup = function (event) {
 
     const guess = event.key.toLowerCase();
 
-
-    //I should have proabably done this whole control flow with a switch instead of nested if else
-    //time and stamina permitting, I will
-
-    /////////////////(re)initialization/////////////////
     if (!isPlaying) {
         initializeGame();
         return;
     }
 
-
-    ///////////////////////////////////////////////////////////////////////
-    ///////////////////////// MAIN GAMEPLAY LOGIC /////////////////////////
-
-
     if (!validateInput(guess)) {
         return;
     }
 
-
-    /////////////////////RIGHT GUESS//////////////////////
     if (answer.indexOf(guess) !== -1) {
-        //display "correct guess!" in user feedback element
+
         handleCorrectGuess();
         return;
     }
 
-
-    /////////////////////WRONG GUESS//////////////////////
-
-
-
-
+    handleWrongGuess();
 
     evaluateProgress();
 
