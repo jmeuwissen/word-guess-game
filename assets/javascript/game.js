@@ -69,11 +69,10 @@ function resetHTMLContent() {
  */
 
 function initializeGame() {
-
     resetHTMLContent();
     resetGameState();
-
 }
+
 /**
  * Deals with the game reaching a defeated state
  */
@@ -93,6 +92,19 @@ function handleWin() {
     wins++;
     winsEL.textContent = "Wins: " + wins;
     isPlaying = false;
+}
+
+/**
+ * Determines whether the game has reached a victorious or a defeated state
+ */
+
+function evaluateProgress() {
+    if (remainingGuesses < 1) {
+        handleLoss();
+    }
+    if (partialSolution.indexOf("_") === -1) {
+        handleWin();
+    }
 }
 
 document.onkeyup = function (event) {
@@ -161,16 +173,7 @@ document.onkeyup = function (event) {
 
         }
 
+        evaluateVictoryOrDefeat();
 
-        /////////////////////GAME OVER////////////////////
-        if (remainingGuesses < 1) {
-            handleLoss();
-        }
-
-        /////////////////////YOU WON/////////////////////
-
-        if (partialSolution.indexOf("_") === -1) {
-            handleWin();
-        }
     }
 }
