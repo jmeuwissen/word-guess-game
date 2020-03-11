@@ -173,7 +173,7 @@ document.onkeyup = function (event) {
 
         }
 
-        evaluateVictoryOrDefeat();
+        evaluateProgress();
 
     }
 }
