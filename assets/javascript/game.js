@@ -65,7 +65,6 @@ function resetHTMLContent() {
 
 /**
  * Sets game to initialized state
- *
  */
 
 function initializeGame() {
@@ -106,6 +105,28 @@ function evaluateProgress() {
         handleWin();
     }
 }
+/**
+ * checks if the given user input is valid
+ * 
+ * @returns false if input is invalid; otherwise true
+ */
+function validateInput(guess) {
+    if (wrongChars.indexOf(guess) !== -1) {
+        messageEL.textContent = "Pick a letter that you haven't guessed, please...";
+        return false;
+    }
+
+    if (partialSolution.indexOf(guess) !== -1) {
+        messageEL.textContent = "Correct! But you already guessed that...";
+        return false
+    }
+
+    if (guess.match(/[^a-z]/)) {
+        messageEL.textContent = "Non-alphabetical character received! Input a letter, please";
+        return false
+    }
+    return true;
+}
 
 document.onkeyup = function (event) {
 
@@ -124,56 +145,46 @@ document.onkeyup = function (event) {
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////// MAIN GAMEPLAY LOGIC /////////////////////////
     else {
-        //begin input validation
-        if (wrongChars.indexOf(guess) !== -1) {
-            ///display "you already guessed that!" in user feedback element
-            messageEL.textContent = "Pick a letter that you haven't guessed, please...";
-        } else if (partialSolution.indexOf(guess) !== -1) {
-            ///display "you already guessed that!" in user feedback element
-            messageEL.textContent = "Correct! But you already guessed that...";
-        } else if (guess.match(/[^a-z]/)) {
-            messageEL.textContent = "Non-alphabetical character received! Input a letter, please";
-        }
-        //end input validation
+
+        if (validateInput(guess)) {
 
 
+            /////////////////////RIGHT GUESS//////////////////////
+            if (answer.indexOf(guess) !== -1) {
+                //display "correct guess!" in user feedback element
+                messageEL.textContent = "You got it!";
 
+                //replace underscores with guess character in indexes that correspond to correct ones in answer
+                for (let i = 0; i < answer.length; i++) {
 
-        /////////////////////RIGHT GUESS//////////////////////
-        else if (answer.indexOf(guess) !== -1) {
-            //display "correct guess!" in user feedback element
-            messageEL.textContent = "You got it!";
-
-            //replace underscores with guess character in indexes that correspond to correct ones in answer
-            for (let i = 0; i < answer.length; i++) {
-
-                //replaces underscore with if guess character is at the current index
-                if (answer[i] === guess) {
-                    partialSolution[i] = guess;
+                    //replaces underscore with if guess character is at the current index
+                    if (answer[i] === guess) {
+                        partialSolution[i] = guess;
+                    }
                 }
+                //update partialSolution
+                partialSolutionEL.textContent = "Incomplete word: " + partialSolution.join("");
             }
-            //update partialSolution
-            partialSolutionEL.textContent = "Incomplete word: " + partialSolution.join("");
+
+
+            /////////////////////WRONG GUESS//////////////////////
+            else {
+                //display "incorrect guess" in user feedback element
+                messageEL.textContent = "That ain't right";
+
+                //put guess in incorrect char array
+                wrongChars = wrongChars + guess;
+                //update wrong-chars display
+                wrongCharsEL.textContent = "Incorrect characters: " + wrongChars;
+
+                //update remaining guesses
+                remainingGuesses--;
+                remainingGuessesEL.textContent = "Guesses remaining: " + remainingGuesses;
+
+            }
+
+            evaluateProgress();
+
         }
-
-
-        /////////////////////WRONG GUESS//////////////////////
-        else {
-            //display "incorrect guess" in user feedback element
-            messageEL.textContent = "That ain't right";
-
-            //put guess in incorrect char array
-            wrongChars = wrongChars + guess;
-            //update wrong-chars display
-            wrongCharsEL.textContent = "Incorrect characters: " + wrongChars;
-
-            //update remaining guesses
-            remainingGuesses--;
-            remainingGuessesEL.textContent = "Guesses remaining: " + remainingGuesses;
-
-        }
-
-        evaluateProgress();
-
     }
 }
