@@ -55,14 +55,13 @@ function resetGameState() {
  */
 
 function resetHTMLContent() {
-    directionsTextEL.textContent = " ";
+    directionsTextEL.textContent =      " ";
     messageEL.textContent =             "Here's a round of Word Guess!";
     winsEL.textContent =                "Wins: " + wins;
     lossesEL.textContent =              "Losses: " + losses;
     wrongCharsEL.textContent =          "Incorrect characters: " + wrongChars;
     remainingGuessesEL.textContent =    "Guesses remaining: " + remainingGuesses;
     partialSolutionEL.textContent =      "Incomplete word: " + partialSolution.join("");
-    return;
 }
 
 /**
@@ -93,11 +92,7 @@ document.onkeyup = function (event) {
 
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////// MAIN GAMEPLAY LOGIC /////////////////////////
-    else {
-
-        console.log("entered main loop")
-
-        
+    else {        
         //begin input validation
         if (wrongChars.indexOf(guess) !== -1) {
             ///display "you already guessed that!" in user feedback element
@@ -156,12 +151,6 @@ document.onkeyup = function (event) {
             //update remaining guesses
             remainingGuesses--;
             remainingGuessesEL.textContent = "Guesses remaining: " + remainingGuesses;
-
-        }
-
-
-        /// display incomplete word on screen with a space between each character
-        for (let i = 0; i < answer.length; i++) {
 
         }
 
