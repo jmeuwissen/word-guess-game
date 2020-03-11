@@ -72,39 +72,7 @@ function initializeGame() {
     resetGameState();
 }
 
-/**
- * Deals with the game reaching a defeated state
- */
-function handleLoss() {
-    messageEL.textContent = "Woops! You lost! Press any key to play again";
-    partialSolutionEL.textContent = "Incomplete word: " + answer;
-    losses++;
-    lossesEL.textContent = "Losses: " + losses;
-    isPlaying = false;
-}
 
-/**
- * Deals with the game reaching a victorious state
- */
-function handleWin() {
-    messageEL.textContent = "Hooray! You win! Press any key to play again";
-    wins++;
-    winsEL.textContent = "Wins: " + wins;
-    isPlaying = false;
-}
-
-/**
- * Determines whether the game has reached a victorious or a defeated state
- */
-
-function evaluateProgress() {
-    if (remainingGuesses < 1) {
-        handleLoss();
-    }
-    if (partialSolution.indexOf("_") === -1) {
-        handleWin();
-    }
-}
 /**
  * checks if the given user input is valid
  * 
@@ -154,6 +122,41 @@ function handleWrongGuess() {
         remainingGuesses--;
         remainingGuessesEL.textContent = "Guesses remaining: " + remainingGuesses;
 }
+
+/**
+ * Deals with the game reaching a defeated state
+ */
+function handleLoss() {
+    messageEL.textContent = "Woops! You lost! Press any key to play again";
+    partialSolutionEL.textContent = "Incomplete word: " + answer;
+    losses++;
+    lossesEL.textContent = "Losses: " + losses;
+    isPlaying = false;
+}
+
+/**
+ * Deals with the game reaching a victorious state
+ */
+function handleWin() {
+    messageEL.textContent = "Hooray! You win! Press any key to play again";
+    wins++;
+    winsEL.textContent = "Wins: " + wins;
+    isPlaying = false;
+}
+
+/**
+ * Determines whether the game has reached a victorious or a defeated state
+ */
+
+function evaluateProgress() {
+    if (remainingGuesses < 1) {
+        handleLoss();
+    }
+    if (partialSolution.indexOf("_") === -1) {
+        handleWin();
+    }
+}
+
 
 document.onkeyup = function (event) {
 
