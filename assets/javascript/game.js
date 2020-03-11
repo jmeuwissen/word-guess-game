@@ -139,52 +139,54 @@ document.onkeyup = function (event) {
     /////////////////(re)initialization/////////////////
     if (!isPlaying) {
         initializeGame();
+        return
     }
 
 
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////// MAIN GAMEPLAY LOGIC /////////////////////////
-    else {
-
-        if (validateInput(guess)) {
 
 
-            /////////////////////RIGHT GUESS//////////////////////
-            if (answer.indexOf(guess) !== -1) {
-                //display "correct guess!" in user feedback element
-                messageEL.textContent = "You got it!";
-
-                //replace underscores with guess character in indexes that correspond to correct ones in answer
-                for (let i = 0; i < answer.length; i++) {
-
-                    //replaces underscore with if guess character is at the current index
-                    if (answer[i] === guess) {
-                        partialSolution[i] = guess;
-                    }
-                }
-                //update partialSolution
-                partialSolutionEL.textContent = "Incomplete word: " + partialSolution.join("");
-            }
-
-
-            /////////////////////WRONG GUESS//////////////////////
-            else {
-                //display "incorrect guess" in user feedback element
-                messageEL.textContent = "That ain't right";
-
-                //put guess in incorrect char array
-                wrongChars = wrongChars + guess;
-                //update wrong-chars display
-                wrongCharsEL.textContent = "Incorrect characters: " + wrongChars;
-
-                //update remaining guesses
-                remainingGuesses--;
-                remainingGuessesEL.textContent = "Guesses remaining: " + remainingGuesses;
-
-            }
-
-            evaluateProgress();
-
-        }
+    if (!validateInput(guess)) {
+        return
     }
+
+
+    /////////////////////RIGHT GUESS//////////////////////
+    if (answer.indexOf(guess) !== -1) {
+        //display "correct guess!" in user feedback element
+        messageEL.textContent = "You got it!";
+
+        //replace underscores with guess character in indexes that correspond to correct ones in answer
+        for (let i = 0; i < answer.length; i++) {
+
+            //replaces underscore with if guess character is at the current index
+            if (answer[i] === guess) {
+                partialSolution[i] = guess;
+            }
+        }
+        //update partialSolution
+        partialSolutionEL.textContent = "Incomplete word: " + partialSolution.join("");
+        return
+    }
+
+
+    /////////////////////WRONG GUESS//////////////////////
+
+    //display "incorrect guess" in user feedback element
+    messageEL.textContent = "That ain't right";
+
+    //put guess in incorrect char array
+    wrongChars = wrongChars + guess;
+    //update wrong-chars display
+    wrongCharsEL.textContent = "Incorrect characters: " + wrongChars;
+
+    //update remaining guesses
+    remainingGuesses--;
+    remainingGuessesEL.textContent = "Guesses remaining: " + remainingGuesses;
+
+
+
+    evaluateProgress();
+
 }
