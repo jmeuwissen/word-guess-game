@@ -7,6 +7,7 @@ let wrongChars = ""; //string of incorrect guesses
 let wins = 0; //win counter
 let losses = 0; //loss counter
 let remainingGuesses = 0;
+let animationComplete = false;
 
 const startButtonEl = document.getElementById("start-button");
 const helperTextEL = document.getElementById("helper-text");
@@ -150,7 +151,7 @@ function handleWin() {
  * Determines whether the game has reached a victorious or a defeated state
  */
 
-function finishGame() {
+function checkGameoverState() {
     if (remainingGuesses < 1) {
         console.log("loss");
 
@@ -164,7 +165,11 @@ function finishGame() {
         initializeGame();
     }
 }
-
+/**
+ * Control-flow that handles user input. Checks if "guess" if valid, then if it was 
+ * previously guessed or is incorrect.
+ * @param {*} guess 
+ */
 function handleInput(guess) {
     //this block only works with the old "press any key to start" initialization
     if (!isPlaying) {
@@ -189,8 +194,16 @@ function handleInput(guess) {
     }
 }
 
-document.onkeyup = function (event) {
-    const guess = event.key.toLowerCase();
-    handleInput(guess);
-    finishGame();
+$('#start-button-area').on('hidden.bs.collapse', function (e) {
+    animationComplete = true;
+    console.log("animationComplete");
+    initializeGame();
+})
+
+document.onkeyup = function (e) {
+    if (animationComplete) {
+        const guess = e.key.toLowerCase();
+        handleInput(guess);
+        checkGameoverState();
+    }
 }
