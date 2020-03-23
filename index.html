@@ -38,7 +38,7 @@
                         data-target=".game-info" aria-expanded="false" aria-controls="game-info">Click
                         me to Start!</button>
                 </p>
-                
+
             </div>
             <div class="game-info hide">
                 <h3>
@@ -47,38 +47,22 @@
                         <div class="col-sm text-center" id="losses"></div>
                     </div>
                 </h3>
-                <h1 class="display-3 text-center">
-                    <p id="partial-solution"></p>
-                </h1>
+                <div class="display-3 text-center" id="guess-info">
+                    <h2 id="partial-solution"></h2>
+                </div>
+                
 
                 <p class="lead text-center" id="message"></p>
 
+                <div class="row">
+                    <div class="col-sm text-left" id="wrong-chars"></div>
+                    <div class="col-sm text-right" id="guesses-remaining"></div>
+                </div>
             </div>
-            
 
-        </div>
-        <div>
-            <p id="directions-text"> </p>
-        </div>
-        <!-- <div>
-            <p id="wins"></p>
-        </div>
-        <div>
-            <p id="losses"></p>
-        </div> -->
-        <div>
-            <p id="guesses-remaining"></p>
-        </div>
-        <div>
-            <p id="wrong-chars"></p>
-        </div>
-        <div>
 
         </div>
 
-        <div>
-            <p id="message"></p>
-        </div>
     </div>
 
     <script type="text/javascript" src="./assets/javascript/game.js"></script>
