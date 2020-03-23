@@ -194,10 +194,22 @@ function handleInput(guess) {
     }
 }
 
+
+$('#start-button').on('click', function (e) {
+    initializeGame();
+    $('.game-info').collapse('toggle');
+})
+
+
+// $('#start-button-area').on('hide.bs.collapse', function (e) {
+//     console.log("animationComplete");
+//     initializeGame();
+// })
+
 $('#start-button-area').on('hidden.bs.collapse', function (e) {
     animationComplete = true;
     console.log("animationComplete");
-    initializeGame();
+
 })
 
 document.onkeyup = function (e) {
