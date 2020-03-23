@@ -8,7 +8,7 @@ let wins = 0; //win counter
 let losses = 0; //loss counter
 let remainingGuesses = 0;
 
-
+const startButtonEl = document.getElementById("start-button");
 const helperTextEL = document.getElementById("helper-text");
 const winsEL = document.getElementById("wins");
 const lossesEL = document.getElementById("losses");
