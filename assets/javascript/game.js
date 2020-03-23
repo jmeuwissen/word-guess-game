@@ -47,6 +47,7 @@ function resetGameState() {
     remainingGuesses = 7;
     answer = chooseRandomWord();
     fillpartialSolution();
+    isPlaying = true;
 }
 
 /**
@@ -68,8 +69,8 @@ function resetHTMLContent() {
  */
 
 function initializeGame() {
-    resetHTMLContent();
     resetGameState();
+    resetHTMLContent();
 }
 
 
@@ -100,13 +101,14 @@ function validateInput(guess) {
  * Deals with the player guessing the correct character
  */
 
-function handleCorrectGuess() {
+function handleCorrectGuess(guess) {
     messageEL.textContent = "You got it!";
     for (let i = 0; i < answer.length; i++) {
         if (answer[i] === guess) {
             partialSolution[i] = guess;
         }
     }
+
     partialSolutionEL.textContent = "Incomplete word: " + partialSolution.join("");
 }
 
@@ -114,13 +116,13 @@ function handleCorrectGuess() {
  * Deals with the player guessing the incorrect character
  */
 
-function handleWrongGuess() {
-        messageEL.textContent = "That ain't right";
-        wrongChars = wrongChars + guess;
-        wrongCharsEL.textContent = "Incorrect characters: " + wrongChars;
+function handleWrongGuess(guess) {
+    messageEL.textContent = "That ain't right";
+    wrongChars = wrongChars + guess;
+    wrongCharsEL.textContent = "Incorrect characters: " + wrongChars;
 
-        remainingGuesses--;
-        remainingGuessesEL.textContent = "Guesses remaining: " + remainingGuesses;
+    remainingGuesses--;
+    remainingGuessesEL.textContent = "Guesses remaining: " + remainingGuesses;
 }
 
 /**
@@ -148,20 +150,23 @@ function handleWin() {
  * Determines whether the game has reached a victorious or a defeated state
  */
 
-function evaluateProgress() {
+function finishGame() {
     if (remainingGuesses < 1) {
+        console.log("loss");
+
         handleLoss();
+        initializeGame();
     }
     if (partialSolution.indexOf("_") === -1) {
+        console.log("win");
+
         handleWin();
+        initializeGame();
     }
 }
 
-
-document.onkeyup = function (event) {
-
-    const guess = event.key.toLowerCase();
-
+function handleInput(guess) {
+    //this block only works with the old "press any key to start" initialization
     if (!isPlaying) {
         initializeGame();
         return;
@@ -173,12 +178,19 @@ document.onkeyup = function (event) {
 
     if (answer.indexOf(guess) !== -1) {
 
-        handleCorrectGuess();
+        handleCorrectGuess(guess);
         return;
     }
 
-    handleWrongGuess();
+    if (answer.indexOf(guess) === -1) {
 
-    evaluateProgress();
+        handleWrongGuess(guess);
+        return;
+    }
+}
 
+document.onkeyup = function (event) {
+    const guess = event.key.toLowerCase();
+    handleInput(guess);
+    finishGame();
 }
