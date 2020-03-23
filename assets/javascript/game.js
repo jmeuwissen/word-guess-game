@@ -9,7 +9,7 @@ let losses = 0; //loss counter
 let remainingGuesses = 0;
 
 
-const directionsTextEL = document.getElementById("directions-text");
+const helperTextEL = document.getElementById("helper-text");
 const winsEL = document.getElementById("wins");
 const lossesEL = document.getElementById("losses");
 const wrongCharsEL = document.getElementById("wrong-chars");
@@ -54,7 +54,7 @@ function resetGameState() {
  */
 
 function resetHTMLContent() {
-    directionsTextEL.textContent = " ";
+    helperTextEL.textContent = " ";
     messageEL.textContent = "Here's a round of Word Guess!";
     winsEL.textContent = "Wins: " + wins;
     lossesEL.textContent = "Losses: " + losses;
