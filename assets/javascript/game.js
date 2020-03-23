@@ -10,7 +10,6 @@ let remainingGuesses = 0;
 let animationComplete = false;
 
 const startButtonEl = document.getElementById("start-button");
-const helperTextEL = document.getElementById("helper-text");
 const winsEL = document.getElementById("wins");
 const lossesEL = document.getElementById("losses");
 const wrongCharsEL = document.getElementById("wrong-chars");
@@ -56,13 +55,12 @@ function resetGameState() {
  */
 
 function resetHTMLContent() {
-    helperTextEL.textContent = " ";
-    messageEL.textContent = "Here's a round of Word Guess!";
+    messageEL.textContent = "Press any character (a-z) to guess!";
     winsEL.textContent = "Wins: " + wins;
     lossesEL.textContent = "Losses: " + losses;
     wrongCharsEL.textContent = "Incorrect characters: " + wrongChars;
     remainingGuessesEL.textContent = "Guesses remaining: " + remainingGuesses;
-    partialSolutionEL.textContent = "Incomplete word: " + partialSolution.join("");
+    partialSolutionEL.textContent = partialSolution.join("");
 }
 
 /**
@@ -110,7 +108,7 @@ function handleCorrectGuess(guess) {
         }
     }
 
-    partialSolutionEL.textContent = "Incomplete word: " + partialSolution.join("");
+    partialSolutionEL.textContent =  partialSolution.join("");
 }
 
 /**
@@ -131,7 +129,7 @@ function handleWrongGuess(guess) {
  */
 function handleLoss() {
     messageEL.textContent = "Woops! You lost! Press any key to play again";
-    partialSolutionEL.textContent = "Incomplete word: " + answer;
+    partialSolutionEL.textContent =  answer;
     losses++;
     lossesEL.textContent = "Losses: " + losses;
     isPlaying = false;
@@ -206,10 +204,9 @@ $('#start-button').on('click', function (e) {
 //     initializeGame();
 // })
 
-$('#start-button-area').on('hidden.bs.collapse', function (e) {
+$('#welcome-container').on('hidden.bs.collapse', function (e) {
     animationComplete = true;
     console.log("animationComplete");
-
 })
 
 document.onkeyup = function (e) {

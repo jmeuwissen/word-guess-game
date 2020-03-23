@@ -9,10 +9,8 @@
 
     <!-- begin bootstrap cdn links -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <script
-    src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-    integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8="
-    crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
     </script>
@@ -20,45 +18,62 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
     </script>
     <!-- end bootstrap cdn links -->
+    <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 
 <body>
     <div class="container">
         <div class="jumbotron" id="intro">
-            <h1 class="display-3 text-center game-info show">
-                <p>Welcome to <del>Hangman</del></p>
-                <p>Word Guess Game!</p>
-            </h1>
+            <div class="game-info show" id="welcome-container">
+                <h1 class="display-3 text-center ">
+                    <p>Welcome to <del>Hangman</del></p>
+                    <p>Word Guess Game!</p>
+                </h1>
+                <p>
+                    <hr class="my-2">
+                </p>
+                <br>
+                <p class="lead text-center " id="start-button-area">
+                    <button class="btn btn-primary btn-lg" id="start-button" type="button" data-toggle="collapse"
+                        data-target=".game-info" aria-expanded="false" aria-controls="game-info">Click
+                        me to Start!</button>
+                </p>
+                
+            </div>
+            <div class="game-info hide">
+                <h3>
+                    <div class="row">
+                        <div class="col-sm text-center" id="wins"></div>
+                        <div class="col-sm text-center" id="losses"></div>
+                    </div>
+                </h3>
+                <h1 class="display-3 text-center">
+                    <p id="partial-solution"></p>
+                </h1>
+
+                <p class="lead text-center" id="message"></p>
+
+            </div>
             
-            <p class="lead" id="helper-text"></p>
-            <p>
-                <hr class="my-2">
-            </p>
-            <br>
-            <p class="lead text-center game-info show" id="start-button-area">
-                <button class="btn btn-primary btn-lg" id="start-button" type="button" data-toggle="collapse"
-                    data-target=".game-info" aria-expanded="false" aria-controls="game-info">Click
-                    me to Start!</button>
-            </p>
+
         </div>
         <div>
             <p id="directions-text"> </p>
         </div>
-        <div>
+        <!-- <div>
             <p id="wins"></p>
         </div>
         <div>
             <p id="losses"></p>
+        </div> -->
+        <div>
+            <p id="guesses-remaining"></p>
         </div>
         <div>
             <p id="wrong-chars"></p>
         </div>
         <div>
-            <p id="guesses-remaining"></p>
-        </div>
 
-        <div>
-            <p id="partial-solution"></p>
         </div>
 
         <div>
