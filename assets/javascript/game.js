@@ -89,10 +89,17 @@ function validateInput(guess) {
         return false
     }
 
-    if (guess.match(/[^a-z]/)) {
+    if (guess.match(/[^a-z]/m)) {
         messageEL.textContent = "Non-alphabetical character received! Input a letter, please";
         return false
     }
+
+    if (guess.match(/[a-z]{2,}/m)) {
+        messageEL.textContent = "Non-alphabetical character received! Input a letter, please";
+        return false
+    }
+    console.log(guess.length);
+    
     return true;
 }
 
@@ -107,7 +114,6 @@ function handleCorrectGuess(guess) {
             partialSolution[i] = guess;
         }
     }
-
     partialSolutionEL.textContent =  partialSolution.join("");
 }
 
@@ -148,6 +154,7 @@ function handleWin() {
 /**
  * Determines whether the game has reached a victorious or a defeated state
  */
+
 
 function checkGameoverState() {
     if (remainingGuesses < 1) {
