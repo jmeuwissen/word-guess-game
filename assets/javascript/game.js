@@ -51,6 +51,14 @@ function resetGameState() {
 }
 
 /**
+ * updates content of html
+ * 
+ */
+function updateHTML(params) {
+    
+}
+
+/**
  * Resets contents of HTML to the initial state
  */
 
