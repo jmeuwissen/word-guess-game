@@ -73,10 +73,12 @@ function updateHTML(params) {
 
 
 function resetHTMLContent() {
-    HTMLElements.message.textContent = "Press any character (a-z) to guess!";
-    HTMLElements.wrongChars.textContent = "Incorrect characters: " + wrongChars;
+    HTMLElements.message.textContent =          "Press any character (a-z) to guess!";
+    HTMLElements.wrongChars.textContent =       "Incorrect characters: " + wrongChars;
     HTMLElements.remainingGuesses.textContent = "Guesses remaining: " + remainingGuesses;
-    HTMLElements.partialSolution.textContent = partialSolution.join("");
+    HTMLElements.partialSolution.textContent =  partialSolution.join("");
+    HTMLElements.wins.textContent =             "Wins: " + wins;
+    HTMLElements.losses.textContent =           "Losses: " + losses;
 }
 
 /**
@@ -101,6 +103,7 @@ function handleCorrectGuess(guess) {
         }
     }
     HTMLElements.partialSolution.textContent = partialSolution.join("");
+    checkGameoverState();
 }
 
 /**
@@ -111,9 +114,9 @@ function handleWrongGuess(guess) {
     HTMLElements.message.textContent = "That ain't right";
     wrongChars = wrongChars + guess;
     HTMLElements.wrongChars.textContent = "Incorrect characters: " + wrongChars;
-
     remainingGuesses--;
     HTMLElements.remainingGuesses.textContent = "Guesses remaining: " + remainingGuesses;
+    checkGameoverState();
 }
 
 /**
@@ -137,6 +140,10 @@ function handleWin() {
     isPlaying = false;
 }
 
+function endGame() {
+    $('.intergame-text').collapse('toggle');
+}
+
 /**
  * Determines whether the game has reached a victorious or a defeated state
  */
@@ -147,13 +154,13 @@ function checkGameoverState() {
         console.log("loss");
 
         handleLoss();
-        initializeGame();
+        endGame();
     }
     if (partialSolution.indexOf("_") === -1) {
         console.log("win");
 
         handleWin();
-        initializeGame();
+        endGame();
     }
 }
 
@@ -170,17 +177,17 @@ function validateInput(guess) {
 
     if (partialSolution.indexOf(guess) !== -1) {
         HTMLElements.message.textContent = "Correct! But you already guessed that...";
-        return false
+        return false;
     }
 
     if (guess.match(/[^a-z]/m)) {
         HTMLElements.message.textContent = "Non-alphabetical character received! Input a letter, please";
-        return false
+        return false;
     }
 
     if (guess.match(/[a-z]{2,}/m)) {
         HTMLElements.message.textContent = "Non-alphabetical character received! Input a letter, please";
-        return false
+        return false;
     }
     console.log(guess.length);
 
@@ -195,7 +202,6 @@ function validateInput(guess) {
 function handleInput(guess) {
     //this block only works with the old "press any key to start" initialization
     if (!isPlaying) {
-        initializeGame();
         return;
     }
 
@@ -222,6 +228,11 @@ $('#start-button').on('click', function (e) {
     $('.game-info').collapse('toggle');
 })
 
+$('#play-again-button').on('click', function (e) {
+    initializeGame();
+    $('.intergame-text').collapse('toggle');
+})
+
 
 // $('#start-button-area').on('hide.bs.collapse', function (e) {
 //     console.log("animationComplete");
@@ -237,6 +248,5 @@ document.onkeyup = function (e) {
     if (animationComplete) {
         const guess = e.key.toLowerCase();
         handleInput(guess);
-        checkGameoverState();
     }
 }

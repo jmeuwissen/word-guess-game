@@ -7,10 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>"Word Guess"</title>
 
-    <!-- moment.js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <!-- begin bootstrap cdn links -->
-    <link rel="cdn" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
@@ -26,8 +24,8 @@
 <body>
     <div class="container">
         <div class="jumbotron" id="intro">
-            <div class="game-info show" id="welcome-container">
-                <h1 class="display-3 text-center ">
+            <div class="game-info collapse show" id="welcome-container">
+                <h1 class="display-3 text-center " id="title-text">
                     <p>Welcome to <del>Hangman</del></p>
                     <p>Word Guess Game!</p>
                 </h1>
@@ -39,6 +37,13 @@
                     <button class="btn btn-primary btn-lg" id="start-button" type="button" data-toggle="collapse"
                         data-target=".game-info" aria-expanded="false" aria-controls="game-info">Click
                         me to Start!</button>
+                </p>
+
+            </div>
+            <div class="intergame-text collapse hide">
+                <p class="lead text-center " id="play-again-button-area">
+                    <button class="btn btn-primary btn-lg" id="play-again-button" type="button" data-toggle="collapse"
+                        data-target=".intergame-text" aria-expanded="false" aria-controls="intergame-text">Play Again</button>
                 </p>
 
             </div>
