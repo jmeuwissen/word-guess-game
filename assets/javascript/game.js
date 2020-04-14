@@ -53,9 +53,12 @@ function resetGameState() {
 }
 
 /**
+ * **HYPOTHETICAL**
+ * 
  * updates content of html
  * 
  */
+
 function updateHTML(params) {
     for (const key in HTMLElements) {
         if (game.text.hasOwnProperty(key)) {
@@ -64,7 +67,6 @@ function updateHTML(params) {
         }
     }
 }
-
 /**
  * Resets contents of HTML to the initial state
  */
@@ -121,7 +123,7 @@ function handleLoss() {
     HTMLElements.message.textContent = "Woops! You lost! Press any key to play again";
     HTMLElements.partialSolution.textContent = answer;
     losses++;
-    lossesEL.textContent = "Losses: " + losses;
+    HTMLElements.losses.textContent = "Losses: " + losses;
     isPlaying = false;
 }
 
@@ -131,7 +133,7 @@ function handleLoss() {
 function handleWin() {
     HTMLElements.message.textContent = "Hooray! You win! Press any key to play again";
     wins++;
-    winsEL.textContent = "Wins: " + wins;
+    HTMLElements.wins.textContent = "Wins: " + wins;
     isPlaying = false;
 }
 
