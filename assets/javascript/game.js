@@ -9,13 +9,17 @@ let losses = 0; //loss counter
 let remainingGuesses = 0;
 let animationComplete = false;
 
-const startButtonEl = document.getElementById("start-button");
-const winsEL = document.getElementById("wins");
-const lossesEL = document.getElementById("losses");
-const wrongCharsEL = document.getElementById("wrong-chars");
-const remainingGuessesEL = document.getElementById("guesses-remaining");
-const partialSolutionEL = document.getElementById("partial-solution");
-const messageEL = document.getElementById("message");
+
+const HTMLElements = {
+    startButton: document.getElementById("start-button"),
+    wins: document.getElementById("wins"),
+    losses: document.getElementById("losses"),
+    wrongChars: document.getElementById("wrong-chars"),
+    remainingGuesses: document.getElementById("guesses-remaining"),
+    partialSolution: document.getElementById("partial-solution"),
+    message: document.getElementById("message"),
+};
+
 
 
 /**
@@ -55,7 +59,7 @@ function resetGameState() {
  * 
  */
 function updateHTML(params) {
-    
+
 }
 
 /**
@@ -82,36 +86,6 @@ function initializeGame() {
 
 
 /**
- * checks if the given user input is valid
- * 
- * @returns false if input is invalid; otherwise true
- */
-function validateInput(guess) {
-    if (wrongChars.indexOf(guess) !== -1) {
-        messageEL.textContent = "Pick a letter that you haven't guessed, please...";
-        return false;
-    }
-
-    if (partialSolution.indexOf(guess) !== -1) {
-        messageEL.textContent = "Correct! But you already guessed that...";
-        return false
-    }
-
-    if (guess.match(/[^a-z]/m)) {
-        messageEL.textContent = "Non-alphabetical character received! Input a letter, please";
-        return false
-    }
-
-    if (guess.match(/[a-z]{2,}/m)) {
-        messageEL.textContent = "Non-alphabetical character received! Input a letter, please";
-        return false
-    }
-    console.log(guess.length);
-    
-    return true;
-}
-
-/**
  * Deals with the player guessing the correct character
  */
 
@@ -122,7 +96,7 @@ function handleCorrectGuess(guess) {
             partialSolution[i] = guess;
         }
     }
-    partialSolutionEL.textContent =  partialSolution.join("");
+    partialSolutionEL.textContent = partialSolution.join("");
 }
 
 /**
@@ -143,7 +117,7 @@ function handleWrongGuess(guess) {
  */
 function handleLoss() {
     messageEL.textContent = "Woops! You lost! Press any key to play again";
-    partialSolutionEL.textContent =  answer;
+    partialSolutionEL.textContent = answer;
     losses++;
     lossesEL.textContent = "Losses: " + losses;
     isPlaying = false;
@@ -178,6 +152,37 @@ function checkGameoverState() {
         initializeGame();
     }
 }
+
+/**
+ * checks if the given user input is valid using regex
+ * 
+ * @returns false if input is invalid; otherwise true
+ */
+function validateInput(guess) {
+    if (wrongChars.indexOf(guess) !== -1) {
+        messageEL.textContent = "Pick a letter that you haven't guessed, please...";
+        return false;
+    }
+
+    if (partialSolution.indexOf(guess) !== -1) {
+        messageEL.textContent = "Correct! But you already guessed that...";
+        return false
+    }
+
+    if (guess.match(/[^a-z]/m)) {
+        messageEL.textContent = "Non-alphabetical character received! Input a letter, please";
+        return false
+    }
+
+    if (guess.match(/[a-z]{2,}/m)) {
+        messageEL.textContent = "Non-alphabetical character received! Input a letter, please";
+        return false
+    }
+    console.log(guess.length);
+
+    return true;
+}
+
 /**
  * Control-flow that handles user input. Checks if "guess" if valid, then if it was 
  * previously guessed or is incorrect.
