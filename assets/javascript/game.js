@@ -57,18 +57,24 @@ function resetGameState() {
  * 
  */
 function updateHTML(params) {
-
+    for (const key in HTMLElements) {
+        if (game.text.hasOwnProperty(key)) {
+            const element = game.text[key];
+            HTMLElements[key].textContent = element;
+        }
+    }
 }
 
 /**
  * Resets contents of HTML to the initial state
  */
 
+
 function resetHTMLContent() {
     HTMLElements.message.textContent = "Press any character (a-z) to guess!";
-    wrongCharsEL.textContent = "Incorrect characters: " + wrongChars;
-    remainingGuessesEL.textContent = "Guesses remaining: " + remainingGuesses;
-    partialSolutionEL.textContent = partialSolution.join("");
+    HTMLElements.wrongChars.textContent = "Incorrect characters: " + wrongChars;
+    HTMLElements.remainingGuesses.textContent = "Guesses remaining: " + remainingGuesses;
+    HTMLElements.partialSolution.textContent = partialSolution.join("");
 }
 
 /**
@@ -92,7 +98,7 @@ function handleCorrectGuess(guess) {
             partialSolution[i] = guess;
         }
     }
-    partialSolutionEL.textContent = partialSolution.join("");
+    HTMLElements.partialSolution.textContent = partialSolution.join("");
 }
 
 /**
@@ -102,10 +108,10 @@ function handleCorrectGuess(guess) {
 function handleWrongGuess(guess) {
     HTMLElements.message.textContent = "That ain't right";
     wrongChars = wrongChars + guess;
-    wrongCharsEL.textContent = "Incorrect characters: " + wrongChars;
+    HTMLElements.wrongChars.textContent = "Incorrect characters: " + wrongChars;
 
     remainingGuesses--;
-    remainingGuessesEL.textContent = "Guesses remaining: " + remainingGuesses;
+    HTMLElements.remainingGuesses.textContent = "Guesses remaining: " + remainingGuesses;
 }
 
 /**
@@ -113,7 +119,7 @@ function handleWrongGuess(guess) {
  */
 function handleLoss() {
     HTMLElements.message.textContent = "Woops! You lost! Press any key to play again";
-    partialSolutionEL.textContent = answer;
+    HTMLElements.partialSolution.textContent = answer;
     losses++;
     lossesEL.textContent = "Losses: " + losses;
     isPlaying = false;
