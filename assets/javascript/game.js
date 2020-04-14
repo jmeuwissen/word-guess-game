@@ -91,6 +91,67 @@ function initializeGame() {
 }
 
 
+$('#start-button').on('click', function (e) {
+    initializeGame();
+    $('.game-info').collapse('toggle');
+})
+
+$('#play-again-button').on('click', function (e) {
+    initializeGame();
+    $('.intergame-text').collapse('toggle');
+})
+
+$('#welcome-container').on('hidden.bs.collapse', function (e) {
+    animationComplete = true;
+    console.log("animationComplete");
+})
+
+
+function endGame() {
+    $('.intergame-text').collapse('toggle');
+}
+
+/**
+ * Deals with the game reaching a defeated state
+ */
+function handleLoss() {
+    HTMLElements.message.textContent = "Woops! You lost! Press any key to play again";
+    HTMLElements.partialSolution.textContent = answer;
+    losses++;
+    HTMLElements.losses.textContent = "Losses: " + losses;
+    isPlaying = false;
+    endGame();
+}
+
+/**
+ * Deals with the game reaching a victorious state
+ */
+function handleWin() {
+    HTMLElements.message.textContent = "Hooray! You win! Press any key to play again";
+    wins++;
+    HTMLElements.wins.textContent = "Wins: " + wins;
+    isPlaying = false;
+    endGame();
+}
+
+
+/**
+ * Determines whether the game has reached a victorious or a defeated state
+ */
+
+
+function checkGameoverState() {
+    if (remainingGuesses < 1) {
+        console.log("loss");
+        handleLoss();
+    }
+    if (partialSolution.indexOf("_") === -1) {
+        console.log("win");
+        handleWin();
+    }
+}
+
+
 /**
  * Deals with the player guessing the correct character
  */
@@ -119,50 +180,6 @@ function handleWrongGuess(guess) {
     checkGameoverState();
 }
 
-/**
- * Deals with the game reaching a defeated state
- */
-function handleLoss() {
-    HTMLElements.message.textContent = "Woops! You lost! Press any key to play again";
-    HTMLElements.partialSolution.textContent = answer;
-    losses++;
-    HTMLElements.losses.textContent = "Losses: " + losses;
-    isPlaying = false;
-}
-
-/**
- * Deals with the game reaching a victorious state
- */
-function handleWin() {
-    HTMLElements.message.textContent = "Hooray! You win! Press any key to play again";
-    wins++;
-    HTMLElements.wins.textContent = "Wins: " + wins;
-    isPlaying = false;
-}
-
-function endGame() {
-    $('.intergame-text').collapse('toggle');
-}
-
-/**
- * Determines whether the game has reached a victorious or a defeated state
- */
-
-
-function checkGameoverState() {
-    if (remainingGuesses < 1) {
-        console.log("loss");
-
-        handleLoss();
-        endGame();
-    }
-    if (partialSolution.indexOf("_") === -1) {
-        console.log("win");
-
-        handleWin();
-        endGame();
-    }
-}
 
 /**
  * checks if the given user input is valid using regex
@@ -222,31 +239,10 @@ function handleInput(guess) {
     }
 }
 
-
-$('#start-button').on('click', function (e) {
-    initializeGame();
-    $('.game-info').collapse('toggle');
-})
-
-$('#play-again-button').on('click', function (e) {
-    initializeGame();
-    $('.intergame-text').collapse('toggle');
-})
-
-
-// $('#start-button-area').on('hide.bs.collapse', function (e) {
-//     console.log("animationComplete");
-//     initializeGame();
-// })
-
-$('#welcome-container').on('hidden.bs.collapse', function (e) {
-    animationComplete = true;
-    console.log("animationComplete");
-})
-
 document.onkeyup = function (e) {
     if (animationComplete) {
         const guess = e.key.toLowerCase();
         handleInput(guess);
     }
 }
+
