@@ -20,8 +20,6 @@ const HTMLElements = {
     message: document.getElementById("message"),
 };
 
-
-
 /**
  * picks a random word from the array of possible words to guess
  * 
@@ -67,9 +65,7 @@ function updateHTML(params) {
  */
 
 function resetHTMLContent() {
-    messageEL.textContent = "Press any character (a-z) to guess!";
-    winsEL.textContent = "Wins: " + wins;
-    lossesEL.textContent = "Losses: " + losses;
+    HTMLElements.message.textContent = "Press any character (a-z) to guess!";
     wrongCharsEL.textContent = "Incorrect characters: " + wrongChars;
     remainingGuessesEL.textContent = "Guesses remaining: " + remainingGuesses;
     partialSolutionEL.textContent = partialSolution.join("");
@@ -90,7 +86,7 @@ function initializeGame() {
  */
 
 function handleCorrectGuess(guess) {
-    messageEL.textContent = "You got it!";
+    HTMLElements.message.textContent = "You got it!";
     for (let i = 0; i < answer.length; i++) {
         if (answer[i] === guess) {
             partialSolution[i] = guess;
@@ -104,7 +100,7 @@ function handleCorrectGuess(guess) {
  */
 
 function handleWrongGuess(guess) {
-    messageEL.textContent = "That ain't right";
+    HTMLElements.message.textContent = "That ain't right";
     wrongChars = wrongChars + guess;
     wrongCharsEL.textContent = "Incorrect characters: " + wrongChars;
 
@@ -116,7 +112,7 @@ function handleWrongGuess(guess) {
  * Deals with the game reaching a defeated state
  */
 function handleLoss() {
-    messageEL.textContent = "Woops! You lost! Press any key to play again";
+    HTMLElements.message.textContent = "Woops! You lost! Press any key to play again";
     partialSolutionEL.textContent = answer;
     losses++;
     lossesEL.textContent = "Losses: " + losses;
@@ -127,7 +123,7 @@ function handleLoss() {
  * Deals with the game reaching a victorious state
  */
 function handleWin() {
-    messageEL.textContent = "Hooray! You win! Press any key to play again";
+    HTMLElements.message.textContent = "Hooray! You win! Press any key to play again";
     wins++;
     winsEL.textContent = "Wins: " + wins;
     isPlaying = false;
@@ -160,22 +156,22 @@ function checkGameoverState() {
  */
 function validateInput(guess) {
     if (wrongChars.indexOf(guess) !== -1) {
-        messageEL.textContent = "Pick a letter that you haven't guessed, please...";
+        HTMLElements.message.textContent = "Pick a letter that you haven't guessed, please...";
         return false;
     }
 
     if (partialSolution.indexOf(guess) !== -1) {
-        messageEL.textContent = "Correct! But you already guessed that...";
+        HTMLElements.message.textContent = "Correct! But you already guessed that...";
         return false
     }
 
     if (guess.match(/[^a-z]/m)) {
-        messageEL.textContent = "Non-alphabetical character received! Input a letter, please";
+        HTMLElements.message.textContent = "Non-alphabetical character received! Input a letter, please";
         return false
     }
 
     if (guess.match(/[a-z]{2,}/m)) {
-        messageEL.textContent = "Non-alphabetical character received! Input a letter, please";
+        HTMLElements.message.textContent = "Non-alphabetical character received! Input a letter, please";
         return false
     }
     console.log(guess.length);
